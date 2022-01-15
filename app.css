@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', arial, sans-serif;
+    color: #333;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #444, #333);
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+* { box-sizing: border-box; }
+
+.c-container {
+    width: 1240px;
+    height: 700px;
+    border-radius: 10px;
+    background: white;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.c-container > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 350ms linear;
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.c-container > div.loaded {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.c-container > div.unloading { transform: translateY(-100%); }
+
+[v-cloak] { opacity: 0; }

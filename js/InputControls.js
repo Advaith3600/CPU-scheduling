@@ -2,7 +2,8 @@ export const InputControls = {
     data() {
         return {
             process: {},
-            processes: []
+            processes: [],
+            quantum: 4
         }
     },
     methods: {
@@ -18,8 +19,8 @@ export const InputControls = {
             this.reset();
         },
         visualize() {
-            const processes = this.processes.map((p, i) => (p.id = i + 1, p));
-            window.engine.load('visualize', processes);
+            const processes = JSON.parse(JSON.stringify(this.processes.map((p, i) => (p.id = i + 1, p))));
+            window.engine.load('visualize', processes, this.quantum);
         }
     },
     created() {

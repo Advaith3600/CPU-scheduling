@@ -1,11 +1,5 @@
 import { Scene } from "./Scene.js";
-import { SJF } from "../algorithms/SJF.js";
-import { PS } from "../algorithms/PS.js";
-import { RR } from "../algorithms/RR.js";
-import { SRTF } from "../algorithms/SRTF.js";
-import { FCFS } from "../algorithms/FCFS.js";
-import { LJF } from "../algorithms/LJF.js";
-import { LRTF } from "../algorithms/LRTF.js";
+import { FCFS, LJF, LRTF, MLFQ, MLQ, PS, RR, SJF, SRTF } from "../algorithms/index.js";
 
 export class VisualizeScene extends Scene {
     constructor() {
@@ -24,7 +18,9 @@ export class VisualizeScene extends Scene {
             [SRTF, '#srtf'],
             [FCFS, '#fcfs'],
             [LJF, '#ljf'],
-            [LRTF, '#lrtf']
+            [LRTF, '#lrtf'],
+            [MLQ, '#mlq'],
+            [MLFQ, '#mlfq']
         ];
         for (const algorithm of algorithms) {
             const copy = processes.map(p => ({ ...p }));
@@ -46,7 +42,7 @@ export class VisualizeScene extends Scene {
                 cumBurst += process.burst;
             }
 
-            $('.v-space > div:last-child').attr('data-after', totalBurst);
+            $(`${algorithm[1]}.v-space > div:last-child`).attr('data-after', totalBurst);
 
             // finding average
             $(`${algorithm[1]}-wait`).html(avgWait.toFixed(2));

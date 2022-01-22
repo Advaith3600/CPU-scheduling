@@ -11,7 +11,8 @@ export const InputControls = {
             this.process = {
                 burst: 0,
                 priority: 0,
-                arrival: 0
+                arrival: 0,
+                system: 0
             }
         },
         addProcess() {

@@ -5,7 +5,7 @@ body {
     color: #333;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(to bottom right, #444, #333);
+    background: linear-gradient(to bottom right, yellow, orange);
 
     display: flex;
     justify-content: center;
@@ -15,14 +15,31 @@ body {
 
 * { box-sizing: border-box; }
 
+.project-heading {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: #222;
+    margin-bottom: 1rem;
+}
+
+.project-about {
+    position: absolute;
+    left: 100%;
+    bottom: 0;
+    width: max-content;
+    padding-left: 10px;
+    font-weight: 500;
+}
+
 .c-container {
     width: 1240px;
     height: 700px;
     border-radius: 10px;
     background: white;
-    margin: auto;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 15px 30px -12px rgba(0, 0, 0, .2);
 }
 
 .c-container > div {
@@ -31,6 +48,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    overflow: auto;
     transition: all 350ms linear;
     transform: translateY(100%);
     opacity: 0;

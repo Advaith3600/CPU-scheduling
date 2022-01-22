@@ -3,6 +3,9 @@ import { SJF } from "../algorithms/SJF.js";
 import { PS } from "../algorithms/PS.js";
 import { RR } from "../algorithms/RR.js";
 import { SRTF } from "../algorithms/SRTF.js";
+import { FCFS } from "../algorithms/FCFS.js";
+import { LJF } from "../algorithms/LJF.js";
+import { LRTF } from "../algorithms/LRTF.js";
 
 export class VisualizeScene extends Scene {
     constructor() {
@@ -14,7 +17,15 @@ export class VisualizeScene extends Scene {
     load(processes, quantum) {
         super.load();
 
-        const algorithms = [[SJF, '#sjf'], [PS, '#ps'], [RR, '#rr'], [SRTF, '#srtf']];
+        const algorithms = [
+            [SJF, '#sjf'],
+            [PS, '#ps'],
+            [RR, '#rr'],
+            [SRTF, '#srtf'],
+            [FCFS, '#fcfs'],
+            [LJF, '#ljf'],
+            [LRTF, '#lrtf']
+        ];
         for (const algorithm of algorithms) {
             const copy = processes.map(p => ({ ...p }));
 

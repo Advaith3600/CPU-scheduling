@@ -15,10 +15,15 @@
     <script src="./js/app.js" type="module"></script>
 </head>
 <body>
-    <div class="c-container">
-        <div class="p-3" id="input" v-cloak>
-            <table class="table table-striped table-hover table-bordered align-middle rounded-3 overflow-hidden">
-                <thead>
+    <div class="project-heading">
+        CPU Scheduling Visualized
+    </div>
+
+    <div class="position-relative mx-auto">
+        <div class="c-container mx-auto">
+            <div class="p-3" id="input" v-cloak>
+                <table class="table table-striped table-hover table-bordered align-middle rounded-3 overflow-hidden">
+                    <thead>
                     <tr>
                         <th>Process</th>
                         <th>Burst time</th>
@@ -26,21 +31,23 @@
                         <th>Priority</th>
                         <th></th>
                     </tr>
-                </thead>
+                    </thead>
 
-                <tbody>
+                    <tbody>
                     <tr>
                         <td></td>
                         <td>
-                            <input type="number" placeholder="Burst Time" v-model="process.burst" class="form-control" />
+                            <input type="number" placeholder="Burst Time" v-model="process.burst" class="form-control"/>
                         </td>
 
                         <td>
-                            <input type="number" placeholder="Arrival Time" v-model="process.arrival" class="form-control" />
+                            <input type="number" placeholder="Arrival Time" v-model="process.arrival"
+                                   class="form-control"/>
                         </td>
 
                         <td>
-                            <input type="number" placeholder="Priority" v-model="process.priority" class="form-control" />
+                            <input type="number" placeholder="Priority" v-model="process.priority"
+                                   class="form-control"/>
                         </td>
 
                         <td>
@@ -65,67 +72,105 @@
                     <tr class="text-center" v-else>
                         <td colspan="5">Add processes to visualize</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            <div class="d-flex justify-content-between">
-                <div class="d-flex align-items-center">
-                    <div class="w-75">Time Quantum</div>
-                    <input type="text" class="form-control" v-model="quantum" placeholder="Time Quantum" />
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="w-75">Time Quantum</div>
+                        <input type="text" class="form-control" v-model="quantum" placeholder="Time Quantum"/>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-outline-secondary" v-on:click="processes = []">Reset</button>
+                        <button class="btn btn-success ms-2" v-on:click="visualize">Visualize</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="visualize" class="p-3">
+                <div class="text-uppercase fs-6 fw-bold opacity-50">Shortest Job First</div>
+                <div class="v-sep w-100">
+                    <div class="v-space" id="sjf"></div>
+
+                    <div class="d-flex flex-column">
+                        <div>Avg. Waiting Time: <span id="sjf-wait"></span></div>
+                        <div>Avg. Turnaround Time: <span id="sjf-turn"></span></div>
+                    </div>
                 </div>
 
-                <div>
-                    <button class="btn btn-outline-secondary" v-on:click="processes = []">Reset</button>
-                    <button class="btn btn-success ms-2" v-on:click="visualize">Visualize</button>
+                <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Priority Scheduling</div>
+                <div class="v-sep w-100">
+                    <div class="v-space" id="ps"></div>
+
+                    <div class="d-flex flex-column">
+                        <div>Avg. Waiting Time: <span id="ps-wait"></span></div>
+                        <div>Avg. Turnaround Time: <span id="ps-turn"></span></div>
+                    </div>
+                </div>
+
+                <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Round Robin</div>
+                <div class="v-sep w-100">
+                    <div class="v-space" id="rr"></div>
+
+                    <div class="d-flex flex-column">
+                        <div>Avg. Waiting Time: <span id="rr-wait"></span></div>
+                        <div>Avg. Turnaround Time: <span id="rr-turn"></span></div>
+                    </div>
+                </div>
+
+                <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Shortest Remaining Time First</div>
+                <div class="v-sep w-100">
+                    <div class="v-space" id="srtf"></div>
+
+                    <div class="d-flex flex-column">
+                        <div>Avg. Waiting Time: <span id="srtf-wait"></span></div>
+                        <div>Avg. Turnaround Time: <span id="srtf-turn"></span></div>
+                    </div>
+                </div>
+
+                <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">First come first serve</div>
+                <div class="v-sep w-100">
+                    <div class="v-space" id="fcfs"></div>
+
+                    <div class="d-flex flex-column">
+                        <div>Avg. Waiting Time: <span id="fcfs-wait"></span></div>
+                        <div>Avg. Turnaround Time: <span id="fcfs-turn"></span></div>
+                    </div>
+                </div>
+
+                <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Longest Job First</div>
+                <div class="v-sep w-100">
+                    <div class="v-space" id="ljf"></div>
+
+                    <div class="d-flex flex-column">
+                        <div>Avg. Waiting Time: <span id="ljf-wait"></span></div>
+                        <div>Avg. Turnaround Time: <span id="ljf-turn"></span></div>
+                    </div>
+                </div>
+
+                <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Longest Remaining Time First</div>
+                <div class="v-sep w-100">
+                    <div class="v-space" id="lrtf"></div>
+
+                    <div class="d-flex flex-column">
+                        <div>Avg. Waiting Time: <span id="lrtf-wait"></span></div>
+                        <div>Avg. Turnaround Time: <span id="lrtf-turn"></span></div>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-end">
+                    <button class="btn btn-success" id="change-input">Change Input</button>
                 </div>
             </div>
         </div>
 
-        <div id="visualize" class="p-3">
-            <div class="text-uppercase fs-6 fw-bold opacity-50">Shortest Job First</div>
-            <div class="v-sep w-100">
-                <div class="v-space" id="sjf"></div>
-
-                <div class="d-flex flex-column">
-                    <div>Avg. Waiting Time: <span id="sjf-wait"></span></div>
-                    <div>Avg. Turnaround Time: <span id="sjf-turn"></span></div>
-                </div>
-            </div>
-
-            <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Priority Scheduling</div>
-            <div class="v-sep w-100">
-                <div class="v-space" id="ps"></div>
-
-                <div class="d-flex flex-column">
-                    <div>Avg. Waiting Time: <span id="ps-wait"></span></div>
-                    <div>Avg. Turnaround Time: <span id="ps-turn"></span></div>
-                </div>
-            </div>
-
-            <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Round Robin</div>
-            <div class="v-sep w-100">
-                <div class="v-space" id="rr"></div>
-
-                <div class="d-flex flex-column">
-                    <div>Avg. Waiting Time: <span id="rr-wait"></span></div>
-                    <div>Avg. Turnaround Time: <span id="rr-turn"></span></div>
-                </div>
-            </div>
-
-            <div class="text-uppercase fs-6 fw-bold opacity-50 mt-4">Shortest Remaining Time First</div>
-            <div class="v-sep w-100">
-                <div class="v-space" id="srtf"></div>
-
-                <div class="d-flex flex-column">
-                    <div>Avg. Waiting Time: <span id="srtf-wait"></span></div>
-                    <div>Avg. Turnaround Time: <span id="srtf-turn"></span></div>
-                </div>
-            </div>
-
-            <div class="mt-5 d-flex justify-content-end">
-                <button class="btn btn-success" id="change-input">Change Input</button>
-            </div>
-        </div>
+        <section class="project-about">
+            <div>Aditya R - AM.EN.U4AIE20005</div>
+            <div>Advaith A J - AM.EN.U4AIE20006</div>
+            <div>G Sabari Nath - AM.EN.U4AIE20026</div>
+            <div>Tharun S - AM.EN.U4AIE20055</div>
+        </section>
     </div>
 </body>
 </html>

@@ -26,8 +26,8 @@ export class VisualizeScene extends Scene {
             const copy = processes.map(p => ({ ...p }));
 
             let p = algorithm[0](copy, quantum),
-                avgWait = p instanceof Array ? p.reduce((a, c) => a + c.wait, 0) / p.length : p.avgWait,
-                avgTurn = p instanceof Array ? p.reduce((a, c) => a + c.turn, 0) / p.length : p.avgTurn;
+                avgWait = p instanceof Array ? p.reduce((a, c) => a + c.wait - c.arrival, 0) / p.length : p.avgWait,
+                avgTurn = p instanceof Array ? p.reduce((a, c) => a + c.turn - c.arrival, 0) / p.length : p.avgTurn;
             if (!(p instanceof Array)) p = p.processes;
 
             const totalBurst = p.reduce((a, c) => a + c.burst, 0);

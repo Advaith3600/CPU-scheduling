@@ -53,6 +53,5 @@ export const MLFQ = (processes) => {
         _processes.push(Q3[i]);
     }
 
-    console.log(_processes);
     return _processes;
 }
